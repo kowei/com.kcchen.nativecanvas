@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        // classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+        // classpath 'com.google.gms:google-services:3.1.0'
+    }
+}
+
+android {
+
+    defaultConfig {
+        // vectorDrawables.useSupportLibrary = true
+        // jackOptions {
+        //     enabled true
+        //     additionalParameters('jack.incremental': 'true')
+        // }
+    }
+
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    configurations {
+        //all*.exclude group: 'com.android.support', module: 'support-v4'
+        //all*.exclude group: 'com.google.android.gms', module: 'play-services-analytics'
+    }
+
+    buildTypes {
+        debug {
+            //minifyEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'assets/www/native_canvas.txt'
+        }
+        release {
+            //minifyEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'assets/www/native_canvas.txt'
+        }
+    }
+
+    dependencies {
+        compile "com.google.android.gms:play-services:8.3.0"
+        compile 'com.github.bumptech.glide:glide:4.7.1'
+        annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+        // annotationProcessor 'com.google.auto.value:auto-value:1.4'
+        // provided 'com.jakewharton.auto.value:auto-value-annotations:1.4'
+    }
+}
+
+configurations.all {
+    // resolutionStrategy.eachDependency {
+    //     DependencyResolveDetails details ->
+    //     if (details.requested.group in ['com.google.android.gms'] && !(details.requested.name in ['multidex', 'multidex-instrumentation'])) {
+    //         details.useVersion "26.1.0"
+    //     }
+    // }
+    resolutionStrategy {
+        // add dependency substitution rules
+        dependencySubstitution {
+            substitute module('com.google.android.gms:play-services-analytics:+') with module('com.google.gms:google-services:3.1.0')
+            resolutionStrategy.force 'com.android.support:support-v4:26+'
+        }
+    }
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                // https://developer.android.com/topic/libraries/support-library/revisions
+                details.useVersion '27.1.1'
+            }
+        }
+    }
+}

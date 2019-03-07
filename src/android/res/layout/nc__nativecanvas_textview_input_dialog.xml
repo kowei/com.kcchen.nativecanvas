@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <TextView
+        android:id="@+id/tv_show_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="33"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_action_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/complete"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/et_bubble_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_action_done"
+        android:layout_margin="10dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:hint="@string/publish_comment"
+        android:imeOptions="actionDone"
+        android:inputType="text|textMultiLine"
+        android:maxLines="5"
+        android:minLines="2"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_fontsize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/et_bubble_input"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Text Size: "
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/edt_fontsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:gravity="right"
+            android:inputType="number"
+            android:maxEms="2"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:textSize="16dp"
+            android:selectAllOnFocus="true"
+            android:text="" />
+
+    </LinearLayout>
+
+    <com.kcchen.nativecanvas.view.ColorPickerView
+        android:id="@+id/colorPickerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_fontsize"
+        android:layout_margin="10dp"
+        android:minHeight="100dp"
+        android:padding="10dp" />
+
+
+</RelativeLayout>

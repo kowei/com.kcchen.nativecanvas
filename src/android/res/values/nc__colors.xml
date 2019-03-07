@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2b231d</color>
+    <color name="colorPrimaryDark">#181411</color>
+    <color name="colorAccent">#fed136</color>
+
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="divider_color">#ff808080</color>
+    <color name="lightgray">#d3d3d3</color>
+    <color name="message_view_header_color">#3cb8e6</color>
+
+    <color name="stroke_color">#8cf437</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
+    <!-- Colour palette -->
+    <integer-array name="default_palette">
+        <!-- Top row -->
+        <item>0xFFFF3030</item>
+        <item>0xFFFF7C30</item>
+        <item>0xFFFFDD30</item>
+        <item>0xFFAAFF30</item>
+        <item>0xFF33F5F7</item>
+        <item>0xFF3072FF</item>
+        <item>0xFFB630FF</item>
+        <item>0xFF000000</item>
+
+        <!-- Bottom row -->
+        <item>0xFFFF8585</item>
+        <item>0xFFFFBF72</item>
+        <item>0xFFF7FF72</item>
+        <item>0xFFC0FF80</item>
+        <item>0xFF96F3F4</item>
+        <item>0xFF7293FF</item>
+        <item>0xFFCD72FF</item>
+        <item>0xFFFFFFFF</item>
+    </integer-array>
+
+    <!-- Main colours -->
+    <color name="accent_colour">@color/yellow_400</color>
+    <color name="primary">@color/deep_purple_500</color>
+    <color name="primary_dark">@color/deep_purple_700</color>
+    <color name="primary_light">@color/purple_300</color>
+
+    <!-- Styling attributes -->
+    <color name="highlight">#70BBBBBB</color>
+    <color name="list_item_selected_colour">@color/holo_blue_light</color>
+    <color name="actionbar_text_colour">#FFFFFF</color>
+    <color name="actionbar_background_colour">@color/primary</color>
+    <color name="tool_selection_colour">@color/primary</color>
+    <color name="selectable_item_background">#444444</color>
+    <color name="panel_background">@color/primary</color>
+    <color name="panel_content_colour">#FFFFFF</color>
+    <color name="drawer_background_colour">@color/deep_purple_300</color>
+    <color name="drawer_content_colour">@android:color/primary_text_light</color>
+    <color name="surface_background_colour">#F5F5F5</color>
+    <color name="divider_dark_background">#1FFFFFFF</color>
+
+    <!-- Colours -->
+    <color name="yellow_400">#FFEE58</color>
+    <color name="holo_blue_light">#FF33B5E5</color>
+    <color name="teal">#E0F2F1</color>
+    <color name="light_blue">#03A9F4</color>
+    <color name="light_green">#8BC34A</color>
+    <color name="cerulean">#007BA7</color>
+    <color name="cerulean_dark">#0044AA</color>
+    <color name="purple_300">#BA68C8</color>
+    <color name="purple">#9C27B0</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="deep_purple_300">#9575CD</color>
+    <color name="deep_purple_500">#673AB7</color>
+    <color name="deep_purple_700">#512DA8</color>
+
+    <color name="palette_icon_grey_border">#CCCCCC</color>
+    <color name="grey_50">#FAFAFA</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_800">#424242</color>
+    <color name="grey_900">#212121</color>
+
+    <!-- cursor -->
+    <color name="cursor_black">#000000</color>
+
+</resources>

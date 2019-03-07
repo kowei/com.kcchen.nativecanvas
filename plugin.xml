@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    id : Plugin識別碼 (for add/remove)
+    version : Plugin版本
+    0.0.1 first version
+    0.0.2 add native view
+    0.0.3 cancel canvas when leave.
+    0.0.4 add pen:width,color,alpha
+    0.0.5 change native canvas overlay on Html.
+    0.0.6 fix camera preview plugin fail issue.
+    0.0.7 add transparent webview
+    0.0.8 pass webview touchevent to native canvas.
+    0.0.9 add show, hide API and extend openCanvas API
+    0.0.10 can set x,y,offset x, offset y in native canvas.
+    0.0.11 add nav bar, update touchevent code.
+    0.0.12 add isOpened, setPosition API
+    0.0.13 add setTouch, setProperty API and touch event optimize
+    0.0.14 add isShow, addObject, setStep, play, openMap, closeMap API
+    0.0.15 code update.
+    0.0.16 fix pen alpha 0.3 to 1.0f
+    0.1.1 add iOS source code support
+    0.1.2 andorid:rename canvasActivity to canvasFragment
+    0.1.3 android:fix pen alpha issue.
+    0.1.4 android:fix change pen path issue when change pen color/width.
+    0.1.5 implement iOS openCanvas, closeCanvas, show, hide, isShow, isOpened, setPosition APIs, and add stroke, setting class
+    0.1.6 android: fix performance issue if pen paths >=50.
+    0.1.7 android: add picture sticker.
+    0.1.8 android: add DrawItem data type.
+    0.1.9 android: fix DrawItem code at order of path and picture.
+    0.1.10 android: fix touchevent issue.
+    0.1.11 android: add bubble text.
+    0.1.12 android: can change bubble text styles: size, color.
+    0.1.13 android: input image from gallery, camera.
+    0.1.14 android: fix string issue.
+    0.1.15 android: add picture and text re-select feature.
+    0.1.16 android: fix multi-touch bug, add redo/undo action.
+    0.2.1 add register, callback
+    0.2.2 add minimap, ImageEdit, TextInput object. addObject, openMap APIs
+    0.2.3 android: add two finger drag.
+    0.2.4 fix first touch without ACTION_DOWN event, final callback without error
+    0.2.5 fix merge
+    0.2.6 android native canvas:add printview.
+    0.2.7 android fix first and back touch event for proper event handling
+    0.2.8 android fix DrawingView crash
+    0.2.9 android make thumbnail 1/4 * 1/4 = 1/16
+    0.2.10 android add bitmap and json cache for performance tuning.
+    0.2.11 android smooth resized image
+    0.2.12 android fix trumped callback error
+    0.2.13 android fix minimap image cache logic error, complete image cache function if no image change and json change
+    0.2.14 fix "Can not perform this action after onSaveInstanceState", use commitAllowingStateLoss() instead of commit()
+    0.2.15 android:new drawingview
+    0.2.16 add JsonHashTask
+    0.2.17 recover code
+    0.2.18 rename openMap, closeMap to mapOen, mapClose, add mapMove, mapScale APIs
+    0.2.19 android fix background color when close, invisible when open
+    0.2.20 android: getMiniMapSizeRadio().getMiniMapX().getMiniMapY().
+    0.2.21 android fix ids from resource for reliability
+    0.2.22 android: add getMiniMapXRadio(),getMiniMapYRadio().
+    0.2.23 android: add picture/text.
+    0.2.24 add clearCanvas API and modify setProperty API for PEN_TYPE enum
+    0.2.25 implement minimap mapopen/mapmove/mapscale
+    0.2.26 fix definition for NativeCanvasEvent, add offsetX offsetY, scale
+    0.2.27 modify setProperty handle
+    0.3.1  new android framework
+    0.3.2  resolve touch between webview and native (cross edge), and layout framework
+    0.3.3  add sticker view and rich text lib
+    0.3.4  add sticker control button layout, rotate control button, zoom in/out control button
+    0.3.5  fix resource and add papper lib
+    0.3.6  update sticker to beta and fix touch lib
+    0.3.7  add new paper lib for scale/drawing fixed size, data export/import
+    0.3.8  finish any paper size scale/move/boundary implemetation
+    0.3.9  sticker and paper binding display
+    0.3.10 fix multi touch rotate bug if view is scaling
+    0.3.11 attach sticker in visible center and optimize move and scale
+    0.3.12 pass correct event to paper
+    0.3.13 add drawing tools, undo manager and make paper self thread
+    0.3.14 fix thread crash, remove thread
+    0.3.15 convert touch when passing to paper
+    0.3.16 fix sticker pointer size, add minimap mapping, add pen drawing, optimize event passing performance
+    0.3.17 add sticker attach to paper
+    0.3.18 sticker attach to paper in correct size and rotation
+    0.4.1  add undo manager, trying to make optimization of paper
+    0.4.2  new framework of drawing
+    0.4.3  sticker add and reselect, modify and update in order
+    0.4.4  undo/redo implementation
+    0.4.5  viewMode implementation
+    0.4.6  add eraser clear all and as a undo item
+    0.4.7  eraser implementation
+    0.4.8  optimize eraser and undo
+    0.4.9  final undo/redo with flatten / buffer drawing
+    0.4.10 optimize find eraser step
+    0.4.11 optimized sticker position/select/posting
+    0.4.12 fix sticker rect after transform, it also affect the sticker attaching to canvas position.
+    0.4.13 fix minimap paper display
+    0.4.14 add debug toggle mode
+    0.4.15 fix some index error of paper
+    0.4.16 fix eraser
+    0.4.17 minimap implementation, add smooth drag and optimized drag
+    0.4.18 improve text sticker with cursor and rich editing
+    0.4.19 change color picker, rich edit components
+    0.4.20 fix Multiple dex files define problem
+    0.4.21 finish Feature #4944: Android 4.4 貼圖層(StickerView) 文字貼圖
+    0.4.22 improve #4944: Android 4.4 貼圖層(StickerView) 文字貼圖 操控圖示
+    0.4.23 add new APIs for project management
+    0.4.24 fix paper change error, reset tool and page display. and load/save page config from file
+    0.4.25 add SVG lib, fix undo not working bug, fix ResultType bug
+    0.5.1 replace SVG lib with https://scand.com/products/svgkit-android/, support raster image.\
+    0.5.2 add drawing path export data
+    0.5.3 fix drawing import/export data null, save/reload thumbnail
+    0.5.4 add new data model for import/export. add new project/page working
+    0.5.5 fix analytics and google-services confliction
+    0.5.6 new asset manager
+    0.5.7 image sticker data import/export, re-select sticker
+    0.5.8 support image sticker transform undo/redo
+    0.5.9 support text sticker transform undo/redo
+    0.5.10 add lambda support, add new rich text lib
+    0.5.11 modify lambda dependancy
+    0.5.12 improve text sticker import/export data
+    0.5.13 fix base64 image import error, fix project list import image(s), add filters and neural style lib
+    0.5.14 add and test tensorflow neural style
+    0.5.15 optimize touch event handling
+    0.6.1 start implement ios, fix display not the same on ios 9/11
+    0.6.2 add touch layer for dispatching touch event
+    0.6.3 fix android 4.x edit page dipay
+    0.6.4 fix android 4.x edit page dipay z-index and work for android 7 also
+    0.6.5 add setTouch to NativeCanvasTouch for enable/disable touch handling
+    0.6.6 fix -1 problem in API delivery (barney found it make iOS crashing)
+    0.6.7 add iOS classes
+    0.6.8 add asset_type enum for conversion of android enum
+    0.6.9 map same enum behavior as android enum
+    0.6.10 add iOS MD5 support and modify bridge hearder hook
+    0.6.11 add SVGKit, CocoaLumberjack lib
+    0.6.12 add toggleViewMode use lock
+    0.6.13 add enum function
+    0.6.14 add regex, modal view, color picker lib
+    0.6.15 update SVGKit, CocoaLumperjak libs
+    0.6.16 modify hook
+    0.6.17 adjust source and add CocoaLumperjak source code
+    0.6.18 fix SVGKit not compatable between iOX 9, 11
+    0.6.19 add ParseProfile Json
+    0.6.20 add UAModalPanel and update CocoaLumperjak
+    0.6.21 fix UAModalPanel error
+    0.6.22 update new color picker and adjust views for touch handling
+    0.6.23 add Tactile, NXDrawKit libs
+    0.6.24 implement openBook: check path URI filepath  openpage: Parse Drawing.json add NativeCanvasPenpaPage.swift
+    0.6.25 fix path error /NativeCanvas/NativeCanvasPenpaPage.swift
+    0.6.26 fix color picker display position
+    0.6.27 fix merge conflicts
+    0.6.28 add data modal stubs
+    0.6.29 fix project error
+    0.6.30 add more data modal stubs
+    0.6.31 fix static method of get Library hashmap
+    0.6.32 final static anchor of Library loading
+    0.6.33 add save/load
+    0.6.34 fix JSON init eroor on xcode 8.3
+    0.6.35 add Swifter extentions
+    0.6.36 implement NativeCanvasPenpaPage
+    0.6.37 optimize view with init and layout, notification for view changed
+    0.6.38 fix PenPalPage switch case and Substring error (for swift 4)
+    0.6.39 fix code for Barney
+    0.6.40 fix write data to json NativeCanvasPenpaPage
+    0.6.41 add pan/pinch gesture to paper
+    0.6.42 proper handle 2 finger for scale/move, 1 figer for drawing
+    0.6.43 add undoItem
+    0.6.44 modify json created method 
+    0.6.45 modify enum function
+    0.6.46 implement undo manager
+    0.6.47 fix BOOK_TYPE error
+    0.6.48 fix Page and library catch save error 
+    0.7.1 tested undo manager
+    0.7.2 fix new SwiftyJSON compatibility and add PenPalLibrary query APIs
+    0.7.3 implement PenPalLibrary static query APIs
+    0.7.4 implement NativeCanvasPenpalAsset
+    0.7.5 add drawing to paper
+    0.7.6 fix assetManager
+    0.7.7 add boundary and limit scale between 1 ~ 5
+    0.7.8 AssetManager can updateAssets json but not Complete all function
+    0.7.9 AssetManager Complete
+    0.7.10 new drawing paper
+    0.7.11 add NativeCanvasPenpalNCImageFile
+    0.7.12 fix plugin.xml 
+    0.7.13 add Glide/Html2Bitmap libs, and add template/templateManager
+    0.7.14 fix xcode 8 error
+    0.7.15 implement template
+    0.7.16 fix bitmap crash issue
+    0.7.17 add blank thumbnail as default
+    0.7.18 fix new template loading error
+    0.7.19 add NCImageFile at PenpalAssetManager
+    0.7.20 fix merge error
+    0.7.21 fix bitmap crash issue again, but sometimes still happen
+    0.7.22 fix thumbnail update error
+    0.7.23 add TemplateManager and Template
+    0.7.24 fix recycled bitmap crash
+    0.7.25 fix setTemplate error while paper not ready
+    0.7.26 remove log
+    0.7.27 remove log & fix clear bitmap error
+    0.7.28 Crashlytics #317 NCBookView.java line 545 https://fabric.io/kye-system-corp/android/apps/com.kcchen.penpal/issues/5af8f9d911e9fa0aa57ad190?time=last-thirty-days
+    0.7.29 Crashlytics #323 NCManager.java line 419 https://fabric.io/kye-system-corp/android/apps/com.kcchen.penpal/issues/5b03f0bf11e9fa0aa5548213?time=last-thirty-days
+    0.7.30 fixed emplateManager and Template
+    0.7.31 add setProperty API and change json loading method
+    0.7.32 fix setProperty not function properly
+    0.7.33 fix tuple type element list cannot be empty
+    0.7.34 add openPage 2nd param to insert page
+    0.7.35 add static INIT for pages creation
+    0.7.36 add isReloadBook callback if total page changed
+    0.7.37 fix page/proj reload callback
+    0.7.38 fix template not showing
+    0.7.39 fix text sticker not showing
+    0.7.40 fix setProfile API logic error
+    0.7.41 fix template :can show pag number
+    0.7.42 fix INIT Api error while create pages
+    0.7.43 add INIT Api with bookTemplateId
+    0.7.44 fix openCanvas error if no params and other isXXX return boolean to make return correct
+    0.7.45 fix thumbnail generation error when dimention smaller than shrink size
+    0.7.46 fix OOM when INIT pages
+    0.7.47 fix INIT async and walkthrough properly
+    0.7.48 fix Book key in json and save book after INIT
+    0.7.49 add CLEARDATA Api
+    0.7.50 add SET_PROFILE Api, and modify setProfile Api with isReload param
+    0.7.51 fix page createProfile error
+    0.7.52 remove log for access to undefined data.   
+    0.7.53 modify wrong native call for SET_PROFILE api
+    0.7.54 fix created templates.json error
+-->
+<plugin id="com.kcchen.nativecanvas" version="0.7.54"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Native Canvas</name>
+    <description>Native Canvas implement Plugin</description>
+    <license>MIT</license>
+    <keywords>cordova,canvas</keywords>
+    <engines>
+        <engine name="cordova" version=">=4.0.0" />
+    </engines>
+    <js-module src="www/NativeCanvas.js" name="NativeCanvas">
+        <clobbers target="NativeCanvas" />
+    </js-module>
+    <!-- asset folder to specify folder, remove specify folder on plugin removing -->
+    <asset src="assets/fonts" target="assets/fonts/nativecanvas" />
+    <asset src="assets/tensorflow" target="assets/tensorflow" />
+    <!-- android -->
+    <platform name="android">
+        <!-- <config-file target="AndroidManifest.xml" parent="/manifest/application"><receiver android:name="com.kcchen.relaunch.RelaunchReceiver" android:enabled="true"><intent-filter><action android:name="android.intent.action.PACKAGE_ADDED"/></intent-filter><intent-filter><action android:name="android.intent.action.MY_PACKAGE_REPLACED"/></intent-filter></receiver></config-file> -->
+        <config-file target="res/xml/config.xml" parent="/*">
+            <!--
+                讓 Cordova 認識這個 Plugin，value 是對應到的 java 程式
+            -->
+            <feature name="NativeCanvas">
+                <param name="android-package" value="com.kcchen.nativecanvas.NativeCanvas"/>
+                <!-- <param name="onload" value="true" /> -->
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/NativeCanvas.java" target-dir="src/com/kcchen/nativecanvas" />
+         <!-- source folder to root folder, remove source folder on removing -->
+        <source-file src="src/android/colorpicker" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/drawtools" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/enums" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/filters" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/knife" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/model" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/multitouch" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/paper" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/sticker" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/svg" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/undo" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/utils" target-dir="src/com/kcchen/nativecanvas" />
+        <source-file src="src/android/view" target-dir="src/com/kcchen/nativecanvas" />
+
+        <source-file src="src/android/libs/arm64-v8a/libtensorflow_demo.so" target-dir="libs/arm64-v8a" framework="true" />
+        <source-file src="src/android/libs/armeabi-v7a/libtensorflow_demo.so" target-dir="libs/armeabi-v7a" framework="true" />
+        <source-file src="src/android/libs/x86/libtensorflow_demo.so" target-dir="libs/x86" framework="true" />
+        <source-file src="src/android/libs/x86_64/libtensorflow_demo.so" target-dir="libs/x86_64" framework="true" />
+
+        <resource-file src="src/android/res/values/nc__attr_richedit_text.xml" target="res/values/nc__attr_richedit_text.xml" />
+        <resource-file src="src/android/res/values/nc__colors.xml" target="res/values/nc__colors.xml" />
+        <resource-file src="src/android/res/values/nc__dimens.xml" target="res/values/nc__dimens.xml" />
+        <resource-file src="src/android/res/values/nc__ids.xml" target="res/values/nc__ids.xml" />
+        <resource-file src="src/android/res/values/nc__strings.xml" target="res/values/nc__strings.xml" />
+        <resource-file src="src/android/res/values/nc__styles.xml" target="res/values/nc__styles.xml" />
+        <resource-file src="src/android/res/values/nc__theme.xml" target="res/values/nc__theme.xml" />
+
+        <resource-file src="src/android/res/layout/nc__canvas_fragment.xml" target="res/layout/nc__canvas_fragment.xml" />
+        <resource-file src="src/android/res/layout/nc__color_picker_edit.xml" target="res/layout/nc__color_picker_edit.xml" />
+        <resource-file src="src/android/res/layout/nc__color_preview.xml" target="res/layout/nc__color_preview.xml" />
+        <resource-file src="src/android/res/layout/nc__color_selector.xml" target="res/layout/nc__color_selector.xml" />
+        <resource-file src="src/android/res/layout/nc__color_widget.xml" target="res/layout/nc__color_widget.xml" />
+        <resource-file src="src/android/res/layout/nc__htmltooloptions.xml" target="res/layout/nc__htmltooloptions.xml" />
+        <resource-file src="src/android/res/layout/nc__nativecanvas_textview_input_dialog.xml" target="res/layout/nc__nativecanvas_textview_input_dialog.xml" />
+        <resource-file src="src/android/res/layout/nc__text_editor_layout.xml" target="res/layout/nc__text_editor_layout.xml" />
+        <resource-file src="src/android/res/layout/nc__text_tool_panel.xml" target="res/layout/nc__text_tool_panel.xml" />
+        <resource-file src="src/android/res/layout/nc_rte_crop_image.xml" target="res/layout/nc_rte_crop_image.xml" />
+
+        <resource-file src="src/android/res/menu/nc_rte_crop_image.xml" target="res/menu/nc_rte_crop_image.xml" />
+
+        <resource-file src="src/android/res/drawable/nc__abra.png" target="res/drawable/nc__abra.png" />
+        <resource-file src="src/android/res/drawable/nc__arrow.xml" target="res/drawable/nc__arrow.xml" />
+        <resource-file src="src/android/res/drawable/nc__bellsprout.png" target="res/drawable/nc__bellsprout.png" />
+        <resource-file src="src/android/res/drawable/nc__checkerboard.png" target="res/drawable/nc__checkerboard.png" />
+        <resource-file src="src/android/res/drawable/nc__colorpickerview__btn_background.xml" target="res/drawable/nc__colorpickerview__btn_background.xml" />
+        <resource-file src="src/android/res/drawable/nc__colorpickerview__btn_background_pressed.xml" target="res/drawable/nc__colorpickerview__btn_background_pressed.xml" />
+        <resource-file src="src/android/res/drawable/nc__cursor.xml" target="res/drawable/nc__cursor.xml" />
+        <resource-file src="src/android/res/drawable/nc__squirtle.png" target="res/drawable/nc__squirtle.png" />
+        <resource-file src="src/android/res/drawable/nc__template_sketch.png" target="res/drawable/nc__template_sketch.png" />
+        <resource-file src="src/android/res/drawable/nc__tool_button.xml" target="res/drawable/nc__tool_button.xml" />
+        <resource-file src="src/android/res/drawable/nc__venonat.png" target="res/drawable/nc__venonat.png" />
+        <resource-file src="src/android/res/drawable/nc__zubat.png" target="res/drawable/nc__zubat.png" />
+        <resource-file src="src/android/res/drawable/nc_camera_crop_height.png" target="res/drawable/nc_camera_crop_height.png" />
+        <resource-file src="src/android/res/drawable/nc_camera_crop_width.png" target="res/drawable/nc_camera_crop_width.png" />
+        <resource-file src="src/android/res/drawable/nc_indicator_autocrop.png" target="res/drawable/nc_indicator_autocrop.png" />
+
+        <resource-file src="src/android/res/drawable-hdpi/nc__ic_keyboard_arrow_left_black_24dp.png" target="res/drawable-hdpi/nc__ic_keyboard_arrow_left_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc__ic_keyboard_arrow_right_black_24dp.png" target="res/drawable-hdpi/nc__ic_keyboard_arrow_right_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc__text_down.png" target="res/drawable-hdpi/nc__text_down.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc__text_foreground_color.png" target="res/drawable-hdpi/nc__text_foreground_color.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc__text_background_color.png" target="res/drawable-hdpi/nc__text_background_color.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc__text_up.png" target="res/drawable-hdpi/nc__text_up.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_close_clear_cancel_dark.png" target="res/drawable-hdpi/nc_menu_close_clear_cancel_dark.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_close_clear_cancel_light.png" target="res/drawable-hdpi/nc_menu_close_clear_cancel_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_rotate_left_dark.png" target="res/drawable-hdpi/nc_menu_rotate_left_dark.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_rotate_left_light.png" target="res/drawable-hdpi/nc_menu_rotate_left_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_rotate_right_dark.png" target="res/drawable-hdpi/nc_menu_rotate_right_dark.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_rotate_right_light.png" target="res/drawable-hdpi/nc_menu_rotate_right_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_save_dark.png" target="res/drawable-hdpi/nc_menu_save_dark.png" />
+        <resource-file src="src/android/res/drawable-hdpi/nc_menu_save_light.png" target="res/drawable-hdpi/nc_menu_save_light.png" />
+
+        <resource-file src="src/android/res/drawable-mdpi/nc__ic_keyboard_arrow_left_black_24dp.png" target="res/drawable-mdpi/nc__ic_keyboard_arrow_left_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc__ic_keyboard_arrow_right_black_24dp.png" target="res/drawable-mdpi/nc__ic_keyboard_arrow_right_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc__text_down.png" target="res/drawable-mdpi/nc__text_down.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc__text_foreground_color.png" target="res/drawable-mdpi/nc__text_foreground_color.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc__text_background_color.png" target="res/drawable-mdpi/nc__text_background_color.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc__text_up.png" target="res/drawable-mdpi/nc__text_up.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_close_clear_cancel_dark.png" target="res/drawable-mdpi/nc_menu_close_clear_cancel_dark.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_close_clear_cancel_light.png" target="res/drawable-mdpi/nc_menu_close_clear_cancel_light.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_rotate_left_dark.png" target="res/drawable-mdpi/nc_menu_rotate_left_dark.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_rotate_left_light.png" target="res/drawable-mdpi/nc_menu_rotate_left_light.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_rotate_right_dark.png" target="res/drawable-mdpi/nc_menu_rotate_right_dark.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_rotate_right_light.png" target="res/drawable-mdpi/nc_menu_rotate_right_light.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_save_dark.png" target="res/drawable-mdpi/nc_menu_save_dark.png" />
+        <resource-file src="src/android/res/drawable-mdpi/nc_menu_save_light.png" target="res/drawable-mdpi/nc_menu_save_light.png" />
+
+        <resource-file src="src/android/res/drawable-xhdpi/nc__bubble_txt_bg.png" target="res/drawable-xhdpi/nc__bubble_txt_bg.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_bold.png" target="res/drawable-xhdpi/nc__ic_bold.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_hyperlink.png" target="res/drawable-xhdpi/nc__ic_hyperlink.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_italic.png" target="res/drawable-xhdpi/nc__ic_italic.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_keyboard_arrow_left_black_24dp.png" target="res/drawable-xhdpi/nc__ic_keyboard_arrow_left_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_keyboard_arrow_right_black_24dp.png" target="res/drawable-xhdpi/nc__ic_keyboard_arrow_right_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_menu_done_holo_light.png" target="res/drawable-xhdpi/nc__ic_menu_done_holo_light.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_menu_send_holo_light.png" target="res/drawable-xhdpi/nc__ic_menu_send_holo_light.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_strikethrough.png" target="res/drawable-xhdpi/nc__ic_strikethrough.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_textcolor.png" target="res/drawable-xhdpi/nc__ic_textcolor.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_textsize.png" target="res/drawable-xhdpi/nc__ic_textsize.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__ic_underline.png" target="res/drawable-xhdpi/nc__ic_underline.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__icon_delete.png" target="res/drawable-xhdpi/nc__icon_delete.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__icon_flip.png" target="res/drawable-xhdpi/nc__icon_flip.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__icon_resize.png" target="res/drawable-xhdpi/nc__icon_resize.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__icon_top_enable.png" target="res/drawable-xhdpi/nc__icon_top_enable.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__text_down.png" target="res/drawable-xhdpi/nc__text_down.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__text_foreground_color.png" target="res/drawable-xhdpi/nc__text_foreground_color.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__text_background_color.png" target="res/drawable-xhdpi/nc__text_background_color.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc__text_up.png" target="res/drawable-xhdpi/nc__text_up.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_close_clear_cancel_dark.png" target="res/drawable-xhdpi/nc_menu_close_clear_cancel_dark.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_close_clear_cancel_light.png" target="res/drawable-xhdpi/nc_menu_close_clear_cancel_light.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_rotate_left_dark.png" target="res/drawable-xhdpi/nc_menu_rotate_left_dark.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_rotate_left_light.png" target="res/drawable-xhdpi/nc_menu_rotate_left_light.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_rotate_right_dark.png" target="res/drawable-xhdpi/nc_menu_rotate_right_dark.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_rotate_right_light.png" target="res/drawable-xhdpi/nc_menu_rotate_right_light.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_save_dark.png" target="res/drawable-xhdpi/nc_menu_save_dark.png" />
+        <resource-file src="src/android/res/drawable-xhdpi/nc_menu_save_light.png" target="res/drawable-xhdpi/nc_menu_save_light.png" />
+
+        <resource-file src="src/android/res/drawable-xxhdpi/nc__ic_keyboard_arrow_left_black_24dp.png" target="res/drawable-xxhdpi/nc__ic_keyboard_arrow_left_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc__ic_keyboard_arrow_right_black_24dp.png" target="res/drawable-xxhdpi/nc__ic_keyboard_arrow_right_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc__text_down.png" target="res/drawable-xxhdpi/nc__text_down.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc__text_foreground_color.png" target="res/drawable-xxhdpi/nc__text_foreground_color.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc__text_background_color.png" target="res/drawable-xxhdpi/nc__text_background_color.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc__text_up.png" target="res/drawable-xxhdpi/nc__text_up.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_close_clear_cancel_dark.png" target="res/drawable-xxhdpi/nc_menu_close_clear_cancel_dark.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_close_clear_cancel_light.png" target="res/drawable-xxhdpi/nc_menu_close_clear_cancel_light.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_rotate_left_dark.png" target="res/drawable-xxhdpi/nc_menu_rotate_left_dark.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_rotate_left_light.png" target="res/drawable-xxhdpi/nc_menu_rotate_left_light.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_rotate_right_dark.png" target="res/drawable-xxhdpi/nc_menu_rotate_right_dark.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_rotate_right_light.png" target="res/drawable-xxhdpi/nc_menu_rotate_right_light.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_save_dark.png" target="res/drawable-xxhdpi/nc_menu_save_dark.png" />
+        <resource-file src="src/android/res/drawable-xxhdpi/nc_menu_save_light.png" target="res/drawable-xxhdpi/nc_menu_save_light.png" />
+
+        <resource-file src="src/android/res/drawable-xxxhdpi/nc__ic_keyboard_arrow_left_black_24dp.png" target="res/drawable-xxxhdpi/nc__ic_keyboard_arrow_left_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-xxxhdpi/nc__ic_keyboard_arrow_right_black_24dp.png" target="res/drawable-xxxhdpi/nc__ic_keyboard_arrow_right_black_24dp.png" />
+        <resource-file src="src/android/res/drawable-xxxhdpi/nc__text_down.png" target="res/drawable-xxxhdpi/nc__text_down.png" />
+        <resource-file src="src/android/res/drawable-xxxhdpi/nc__text_foreground_color.png" target="res/drawable-xxxhdpi/nc__text_foreground_color.png" />
+        <resource-file src="src/android/res/drawable-xxxhdpi/nc__text_background_color.png" target="res/drawable-xxxhdpi/nc__text_background_color.png" />
+        <resource-file src="src/android/res/drawable-xxxhdpi/nc__text_up.png" target="res/drawable-xxxhdpi/nc__text_up.png" />
+
+
+        <!-- <framework src="com.android.support:appcompat-v7:26.0.0-alpha1" /> -->
+        <framework src="at.wirecube:additive_animations:1.5.0" />
+        <framework src="org.tensorflow:tensorflow-android:1.4+" />
+        <!--
+        custom build.gradle to fix dex problem
+        Multiple dex files define Landroid/support/design/widget/CoordinatorLayout -> configurations { all*.exclude group: 'com.android.support', module: 'support-v4' }
+        -->
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
+
+        <asset src="src/android/native_canvas.txt" target="native_canvas.txt" />
+ 
+        <dependency id="com.kcchen.lambda" url="./custom_plugins" subdir="com.kcchen.lambda" version="^1.0.1"/>
+    </platform>
+    <platform name="ios">
+        <hook src="hooks/add_bridge_header.js" type="after_plugin_install" />
+        <hook src="hooks/add_bridge_header.js" type="before_compile" />
+        <hook src="hooks/remove_bridge_header.js" type="before_plugin_uninstall" />
+        <config-file target="config.xml" parent="/*">
+            <feature name="NativeCanvas">
+                <param name="ios-package" value="NativeCanvas" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/NativeCanvas.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasColorLog.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasColorView.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasColorWheel.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasData.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasDataPaper.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasDataStickerText.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasEnum.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasGestureRecognizer.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasManager.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasModal.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPaper.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPaperContainer.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPaperDrawing.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalAsset.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalAssetManager.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalBook.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalBookshelf.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalLibrary.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalPage.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalTemplate.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasPenpalTemplateManager.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasRingControl.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasRingView.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasSettings.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasSticker.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasStickerImage.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasStickerText.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasStickerView.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasStroke.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasSwiftRegex.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasTouch.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasUndoItem.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasUndoItemDrawing.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasUndoManager.swift" />
+        <source-file src="src/ios/NativeCanvas/NativeCanvasUtils.swift" />
+
+        <source-file src="src/ios/CocoaLumberjack/CocoaLumberjack.swift" />
+        <source-file src="src/ios/CocoaLumberjack/DDAbstractDatabaseLogger.m" />
+        <source-file src="src/ios/CocoaLumberjack/DDASLLogCapture.m" />
+        <source-file src="src/ios/CocoaLumberjack/DDASLLogger.m" />
+        <source-file src="src/ios/CocoaLumberjack/DDFileLogger.m" />
+        <source-file src="src/ios/CocoaLumberjack/DDLog.m" />
+        <source-file src="src/ios/CocoaLumberjack/DDOSLogger.m" />
+        <source-file src="src/ios/CocoaLumberjack/DDTTYLogger.m" />
+        <source-file src="src/ios/CocoaLumberjack/Extensions/DDContextFilterLogFormatter.m" />
+        <source-file src="src/ios/CocoaLumberjack/Extensions/DDDispatchQueueLogFormatter.m" />
+        <source-file src="src/ios/CocoaLumberjack/Extensions/DDMultiFormatter.m" />
+        <source-file src="src/ios/CocoaLumberjack/CLI/CLIColor.m" />
+
+        <source-file src="src/ios/UAModalPanel/UIView+JMNoise.m" />
+        <source-file src="src/ios/UAModalPanel/UAModalPanel.m" />
+        <source-file src="src/ios/UAModalPanel/UATitledModalPanel.m" />
+        <source-file src="src/ios/UAModalPanel/UAGradientBackground.m" />
+        <source-file src="src/ios/UAModalPanel/UANoisyGradientBackground.m" />
+        <source-file src="src/ios/UAModalPanel/UARoundedRectView.m" />
+
+        <!-- https://github.com/delba/Tactile -->
+        <source-file src="src/ios/Tactile/Tactile.swift" />
+        <source-file src="src/ios/Tactile/TactileUtilities.swift" />
+        <source-file src="src/ios/Tactile/UIControl+Tactile.swift" />
+        <source-file src="src/ios/Tactile/UIView+Tactile.swift" />
+
+        <!-- https://github.com/Nicejinux/NXDrawKit -->
+        <source-file src="src/ios/NXDrawKit/NXDrawKitBrush.swift" />
+        <source-file src="src/ios/NXDrawKit/NXDrawKitCanvas.swift" />
+        <source-file src="src/ios/NXDrawKit/NXDrawKitCircleButton.swift" />
+        <source-file src="src/ios/NXDrawKit/NXDrawKitDrawing.swift" />
+        <source-file src="src/ios/NXDrawKit/NXDrawKitPalette.swift" />
+        <source-file src="src/ios/NXDrawKit/NXDrawKitSession.swift" />
+        <source-file src="src/ios/NXDrawKit/NXDrawKitToolBar.swift" />
+        <source-file src="src/ios/NXDrawKit/UIImage+NXDrawKit.swift" />
+        <source-file src="src/ios/NXDrawKit/UIView+NXDrawKit.swift" />
+
+        <!-- https://github.com/SwifterSwift/SwifterSwift -->
+        <source-file src="src/ios/SwifterSwift/SwifterSwift.swift" />
+
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCGColorExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCGFloatExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCGPointExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCGRectExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCGSizeExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCGVectorExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaCLLocationExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaNSAttributedStringExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaNSColorExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Cocoa/SwifterCocoaNSViewExtensions.swift" />
+
+        <source-file src="src/ios/SwifterSwift/Foundation/Deprecated/SwifterFoundationDeprecated.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationArrayExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationBoolExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationCharacterExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationCollectionExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationDataExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationDateExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationDictionaryExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationDoubleExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationFloatExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationFloatingPointExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationIntExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationLocaleExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationOptionalExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationSignedIntegerExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationSignedNumberExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationStringExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/Foundation/SwifterFoundationURLExtensions.swift" />
+
+        <source-file src="src/ios/SwifterSwift/UIKit/Deprecated/SwifterUIKitDeprecated.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIAlertControllerExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIBarButtonItemExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIButtonExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUICollectionViewExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIColorExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIImageExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIImageViewExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUILabelExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUINavigationBarExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUINavigationControllerExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUINavigationItemExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUISearchBarExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUISegmentedControlExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUISliderExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIStoryboardExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUISwitchExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUITabBarExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUITableViewExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUITextFieldExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUITextViewExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIViewControllerExtensions.swift" />
+        <source-file src="src/ios/SwifterSwift/UIKit/SwifterUIKitUIViewExtensions.swift" />
+
+        <resource-file src="src/ios/resource/close.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/close@2x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_camera.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_camera@2x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_camera@3x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_eraser.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_eraser@2x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_eraser@3x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_redo.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_redo@2x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_redo@3x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_undo.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_undo@2x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/icon_undo@3x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/modalButton-selected.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/modalButton-selected@2x.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/modalButton.png" target-dir="drawable" />
+        <resource-file src="src/ios/resource/modalButton@2x.png" target-dir="drawable" />
+
+        <resource-file src="src/ios/resource/heart.svg" target-dir="svg" />
+        <resource-file src="src/ios/resource/sun.svg" target-dir="svg" />
+
+        <framework src="libxml2.tbd" />
+
+        <!-- <framework src="libz.dylib" />
+        <framework src="libc++.dylib" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="Security.framework" weak="true" /> -->
+
+        <!-- <framework src="src/ios/lib/CocoaLumberjackSwift.framework" custom="true" /> -->
+        <!-- <framework src="src/ios/lib/CocoaLumberjack.framework" custom="true" embed="true" /> -->
+        <!-- <source-file src="src/ios/lib/libCocoaLumberjack.a" target-dir="lib" framework="true" /> -->
+        <!-- <header-file src="src/ios/NativeCanvas-Header.h" target-dir="" /> -->
+
+        <source-file src="src/ios/lib/libSVGKit-iOS.2.0.0.a" target-dir="lib" framework="true" />
+        <header-file src="src/ios/include/SVGKit" />
+        <header-file src="src/ios/include/CocoaLumberjack" />
+        <header-file src="src/ios/include/NativeCanvas" />
+        <header-file src="src/ios/include/UAModalPanel" />
+
+        <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
+    </platform>
+</plugin>

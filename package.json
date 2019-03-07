@@ -1,0 +1,28 @@
+{
+  "name": "com.kcchen.nativecanvas",
+  "version": "0.7.54",
+  "description": "Native Canvas implement Plugin",
+  "types": "./types/index.d.ts",
+  "cordova": {
+    "id": "com.kcchen.nativecanvas",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "main": "./www/NativeCanvas.js",
+  "keywords": [
+    "cordova",
+    "canvas",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "author": "KC Chen",
+  "license": "MIT"
+}

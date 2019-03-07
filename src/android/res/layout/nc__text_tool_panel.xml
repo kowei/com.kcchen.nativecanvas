@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/html_options"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+
+        android:id="@+id/rich_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:gravity="center_vertical"
+        >
+
+        <ImageButton
+            android:id="@+id/makeBold"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__ic_bold" />
+
+        <ImageButton
+            android:id="@+id/makeUnderline"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__ic_underline" />
+
+        <ImageButton
+            android:id="@+id/makeStrikethrough"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__ic_strikethrough" />
+
+        <ImageButton
+            android:id="@+id/makeItalic"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__ic_italic" />
+
+        <ImageButton
+            android:id="@+id/makeTextUp"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__text_up" />
+
+        <ImageButton
+            android:id="@+id/makeTextDown"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__text_down" />
+
+        <ImageButton
+            android:id="@+id/makeForeground"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__text_foreground_color" />
+
+        <ImageButton
+            android:id="@+id/makeBackground"
+            android:background="@drawable/nc__tool_button"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:padding="3dp"
+            android:src="@drawable/nc__text_background_color" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/makeBackground"-->
+            <!--android:layout_width="24dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:background="@color/lightgray"-->
+            <!--android:gravity="center"-->
+            <!--android:text="B"-->
+            <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+
+    </LinearLayout>
+
+
+</LinearLayout>
