@@ -1,105 +1,54 @@
-cordova-screenshot
+Cordova DrawingPDF Plugin
 ==================
 
-[![NPM version](http://img.shields.io/npm/v/com.darktalker.cordova.screenshot.svg?style=flat)](https://www.npmjs.com/package/com.darktalker.cordova.screenshot)
+The Cordova NativeCanvas plugin allows your application to open a native drawing view underneath WebView. So the native canvas can have native performance on drawing algorithm.
 
-
-The Screenshot plugin allows your application to take screenshots of the current screen and save them into the phone.
-
-##how to install
+## How to install
 
 install it via cordova cli
 
-```
-cordova plugin add https://github.com/gitawego/cordova-screenshot.git
-```
+
+* cordova plugin add `[local file path to this plugin]`
+
 
 notice:
-in iOS, only jpg format is supported
-in Android, the default WebView and [Crosswalk](https://crosswalk-project.org/documentation/cordova.html) are both supported
+this plugin has not commit to public repository, please install locally.
 
-##usage
-
-
-```js
-navigator.screenshot.save(function(error,res){
-  if(error){
-    console.error(error);
-  }else{
-    console.log('ok',res.filePath);
-  }
-});
-```
-take screenshot with jpg and custom quality
-```js
-navigator.screenshot.save(function(error,res){
-  if(error){
-    console.error(error);
-  }else{
-    console.log('ok',res.filePath);
-  }
-},'jpg',50);
-```
-
-define a filename
-```js
-navigator.screenshot.save(function(error,res){
-  if(error){
-    console.error(error);
-  }else{
-    console.log('ok',res.filePath); //should be path/to/myScreenshot.jpg
-  }
-},'jpg',50,'myScreenShot');
-```
-
-screenshot files are stored in /sdcard/Pictures for android.
-
-take screenshot and get it as Data URI
-```js
-navigator.screenshot.URI(function(error,res){
-  if(error){
-    console.error(error);
-  }else{
-    html = '<img style="width:50%;" src="'+res.URI+'">';
-    document.body.innerHTML = html;
-  }
-},50);
-```
-
-##usage in AngularJS
-
-```js
-.service('$cordovaScreenshot', ['$q', function ($q){
-	return {
-		capture: function (filename, extension, quality){
-			extension = extension || 'jpg';
-			quality = quality || '100';
-
-			var defer = $q.defer();
-			
-			navigator.screenshot.save(function (error, res){
-				if (error) {
-					console.error(error);
-					defer.reject(error);
-				} else {
-					console.log('screenshot saved in: ', res.filePath);
-					defer.resolve(res.filePath);
-				}
-			}, extension, quality, filename);
-			
-			return defer.promise;
-		}
-	};
-}])
-```
-
-##Known Issue
-###in Android platform I receive the black image with crosswalk 
-####solution: 
-
-add this line ``<preference name="CrosswalkAnimatable" value="true" />`` in config.xml, see [bug](https://crosswalk-project.org/jira/browse/XWALK-2233)
+## Usage
 
 
-License
-=========
-this repo uses the MIT license
+## Known Issue
+
+## License
+
+MIT License
+
+Copyright (c) 2019 KC Chen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+## Plugin author
+
+(c) KC Chen - [https://github.com/kowei](https://github.com/kowei)
+
+## Project help, bugs
+
+If you need help you can contact the maintainers on the project page on GitHub ([https://github.com/kowei/com.kcchen.nativecanvas](https://github.com/kowei/com.kcchen.nativecanvas)). If you want to report bugs, please open a new issue here: [https://github.com/kowei/com.kcchen.nativecanvas/issues](https://github.com/kowei/com.kcchen.nativecanvas/issues)
+
