@@ -1,4 +1,4 @@
-Cordova DrawingPDF Plugin
+Cordova NativeCanvas Plugin
 ==================
 
 The Cordova NativeCanvas plugin allows your application to open a native drawing view underneath WebView. So the native canvas can have native performance on drawing algorithm.
